@@ -110,7 +110,6 @@ etable.all = topTable(efit.all,coef=1, number=Inf, sort.by= "none") %>%
 # Load gene set enrichment database for KEGG pathways
 # Downloaded from the Broad Institute's Molecular Signatures Database
 msig.filename = "KEGG.gmt"
-msig.filename = "C://Users/edikb/Google Drive/rdata/BroadSets/KEGG.gmt"
 msig.data.read = readLines(msig.filename)
 msig.data.list = strsplit(msig.data.read, split="\t")
 msig.data.id = sapply(msig.data.list,function(x) x[[1]])
