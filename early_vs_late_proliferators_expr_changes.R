@@ -172,10 +172,11 @@ gset.make.contrast = eset.make.contrast
 gset.eset = eset.filtered
 
 # Apply the "single sample gene set enrichment analysis" method
+set.seed(20151216)
 gset.result = gsva(gset.eset, kegg.sets, method="ssgsea")
 gset = gset.result$es.obs
 fData(gset) = kegg.annotation[featureNames(gset),]
-gfit = lmFit(gset, gset.design, method="robust", maxit=1000) %>% 
+gfit = lmFit(gset, gset.design, method="robust", maxit=10000) %>% 
   contrasts.fit(gset.make.contrast) %>% eBayes()
 gtable = gfit %>% topTable(coef = 1, number=Inf, sort.by = "none") %>%
   mutate(logFC, FC = 2 ^ logFC, pctFC = 100 * round(FC - 1, 3), FDR = adj.P.Val, 
